@@ -4,39 +4,68 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="서울에서 꼭 가봐야 할 맛집을 사진·평점·주소·연락처와 함께 모았습니다." />
     <link rel="stylesheet" href="css/restaurants.css">
-    <title>서울 맛집 리스트</title>
+    <title>서울 맛집 가이드 · Seoul Food Guide</title>
 </head>
 <body>
     <header class="hero">
+        <div class="hero__bg" aria-hidden="true"></div>
         <div class="hero__inner">
-            <p class="hero__eyebrow">SEOUL FOOD GUIDE</p>
-            <h1 class="hero__title">서울 맛집 리스트 🍜</h1>
-            <p class="hero__subtitle">사진 · 주소 · 연락처를 한눈에. 서울에서 꼭 가봐야 할 맛집을 모았습니다.</p>
+            <p class="hero__eyebrow">SEOUL · FOOD · GUIDE</p>
+            <h1 class="hero__title">서울 맛집 가이드</h1>
+            <p class="hero__subtitle">사진 · 평점 · 주소 · 연락처를 한눈에.<br />서울에서 진짜 맛있는 곳만 골랐습니다.</p>
             <div class="search">
-                <i class="search__icon">🔎</i>
-                <input id="search-input" type="text" placeholder="맛집 이름, 지역, 메뉴로 검색하세요" />
+                <span class="search__icon" aria-hidden="true">🔍</span>
+                <input id="search-input" type="search" placeholder="맛집·지역·메뉴 검색 (예: 라멘, 강남, 한우)" aria-label="맛집 검색" />
             </div>
-            <div class="filters" id="filters">
-                <button class="filter filter--active" data-category="all">전체</button>
-                <button class="filter" data-category="한식">한식</button>
-                <button class="filter" data-category="고기">고기</button>
-                <button class="filter" data-category="면">면 요리</button>
-                <button class="filter" data-category="카페">카페·디저트</button>
-                <button class="filter" data-category="양식">양식</button>
+            <div class="hero__stats">
+                <span><strong id="stat-total">0</strong> 곳</span>
+                <span class="dot">·</span>
+                <span><strong>6</strong> 카테고리</span>
+                <span class="dot">·</span>
+                <span>매주 업데이트</span>
             </div>
         </div>
     </header>
 
+    <nav class="toolbar">
+        <div class="toolbar__inner">
+            <div class="filters" id="filters" role="tablist" aria-label="카테고리 필터">
+                <button class="chip chip--active" data-category="all">전체</button>
+                <button class="chip" data-category="한식">한식</button>
+                <button class="chip" data-category="고기">고기·구이</button>
+                <button class="chip" data-category="면">면 요리</button>
+                <button class="chip" data-category="양식">양식</button>
+                <button class="chip" data-category="카페">카페·디저트</button>
+            </div>
+            <label class="sort">
+                <span>정렬</span>
+                <select id="sort-select" aria-label="정렬 기준">
+                    <option value="rating">평점 높은순</option>
+                    <option value="name">이름순</option>
+                    <option value="price-asc">가격 낮은순</option>
+                    <option value="price-desc">가격 높은순</option>
+                </select>
+            </label>
+        </div>
+    </nav>
+
     <main class="container">
         <p class="result-count" id="result-count"></p>
-        <section class="grid" id="restaurant-grid"></section>
-        <p class="no-result" id="no-result" hidden>검색 결과가 없습니다. 다른 키워드로 찾아보세요.</p>
+        <section class="grid" id="restaurant-grid" aria-live="polite"></section>
+        <p class="no-result" id="no-result" hidden>
+            <span class="no-result__emoji">🍽️</span><br />
+            검색 결과가 없어요. 다른 키워드로 찾아보세요.
+        </p>
     </main>
 
     <footer class="footer">
-        <p>© 2026 서울 맛집 리스트 · 사진은 예시 이미지입니다.</p>
+        <p class="footer__title">서울 맛집 가이드</p>
+        <p class="footer__note">© 2026 Seoul Food Guide · 사진은 예시 이미지이며, 방문 전 영업시간을 확인하세요.</p>
     </footer>
+
+    <button class="to-top" id="to-top" aria-label="맨 위로" hidden>↑</button>
 
     <script src="js/restaurants.js"></script>
 </body>
