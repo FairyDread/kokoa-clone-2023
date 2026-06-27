@@ -15,16 +15,14 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  # Pages 활성화 + 아티팩트 업로드 (환경 참조 없음 → 첫 배포 시 셋업 차단 방지)
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Configure Pages
+      - name: Enable & configure Pages
         uses: actions/configure-pages@v5
         with:
           enablement: true
@@ -34,6 +32,14 @@ jobs:
         with:
           path: "."
 
+  # 실제 배포 (Pages가 활성화된 뒤 github-pages 환경으로 배포)
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
